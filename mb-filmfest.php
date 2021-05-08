@@ -19,8 +19,19 @@ namespace Inggo\WordPress\MBFilmFest;
  * Text Domain:     mb-filmfest
  */
 
-include_once(\plugin_dir_path(__FILE__) . 'Updater.php');
+spl_autoload_register(__NAMESPACE__ . "\autoloader");
 
+function autoloader($class_name)
+{
+    $classes_dir = realpath(\plugin_dir_path(__FILE__ )) . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR;
+    $class_file = str_replace('_', DIRECTORY_SEPARATOR, $class_name) . '.php';
+    require_once $classes_dir . $class_file;
+}
+
+// Check for updates
 $updater = new Updater(__FILE__);
 $updater->setUsername('inggo');
 $updater->setRepository('wp-mbfilmfest');
+
+// Initialize plugin
+new Init();

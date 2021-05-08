@@ -2,7 +2,8 @@
 
 namespace Inggo\WordPress\MBFilmFest;
 
-class Updater {
+class Updater
+{
     protected $file;
     protected $plugin;
     protected $basename;
@@ -15,7 +16,7 @@ class Updater {
   
     public function __construct($file) {
         $this->file = $file;
-        \add_action('admin_init', array($this, 'setPluginProperties'));         
+        \add_action('admin_init', array($this, 'setPluginProperties'));
         return $this;
     }
 
@@ -123,6 +124,6 @@ class Updater {
 
           $this->github_response = $response;
         }
-      }
+    }
       
 }

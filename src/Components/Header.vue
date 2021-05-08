@@ -25,7 +25,7 @@ export default {
     },
     width: {
       type: String,
-      default: '100vw'
+      default: 'calc(100vw - (100vw - 100%))'
     },
     height: {
       type: String,
@@ -44,7 +44,7 @@ export default {
 
 <style scoped>
 .mbfilmfest_header {
-  width: 100vw;
+  width: calc(100vw - (100vw - 100%));
   height: 50vh;
   background-repeat: no-repeat;
   background-position: center;

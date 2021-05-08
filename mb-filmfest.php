@@ -8,7 +8,7 @@
  * 
  * @wordpress-plugin
  * Plugin Name:     Mateship and Bayanihan Film Festival
- * Version:         0.1.1
+ * Version:         0.1.2
  * Author:          Inggo Espinosa
  * Author URI:      https://inggo.dev
  * License:         GPLv3

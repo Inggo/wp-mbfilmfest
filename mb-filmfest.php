@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 namespace Inggo\WordPress\MBFilmFest;
 
 /**
@@ -11,7 +10,7 @@ namespace Inggo\WordPress\MBFilmFest;
  * 
  * @wordpress-plugin
  * Plugin Name:     Mateship and Bayanihan Film Festival
- * Version:         0.1.4
+ * Version:         0.1.5
  * Author:          Inggo Espinosa
  * Author URI:      https://inggo.dev
  * License:         GPLv3

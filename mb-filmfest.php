@@ -1,4 +1,7 @@
 ﻿<?php
+
+namespace Inggo\WordPress\MBFilmFest;
+
 /**
  * Mateship and Bayanihan Film Festival
  * 
@@ -15,7 +18,6 @@
  * License URI:     https://www.gnu.org/licenses/quick-guide-gplv3.html
  * Text Domain:     mb-filmfest
  */
-namespace Inggo\WordPress\MBFilmFest;
 
 include_once(\plugin_dir_path(__FILE__) . 'Updater.php');
 

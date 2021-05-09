@@ -1,16 +1,22 @@
 ﻿<template>
-  <section class="mbfilmfest_partners">
-    <h3>{{ title }}</h3>
+  <section
+    class="mbfilmfest_partners"
+    :class="layout == 'instax' ? 'mbfilmfest_partners_instax' : null"
+    :style="{
+      backgroundColor: background
+    }"
+  >
+    <h3 v-if="title">{{ title }}</h3>
     <ul>
       <li 
-        v-for="partner in partners" 
-        :key="partner.id" 
-        :ref="partner.id"
-        @click="goToLink(partner.link)"
-        :style="randomRot()"
+        v-for="link in links" 
+        :key="link.id" 
+        :ref="link.id"
+        @click="goToLink(link.link)"
+        :style="layout == 'instax' ? randomRot() : null"
       >
-        <img :src="partner.image" :alt="partner.name">
-        <h4>{{ partner.name }}</h4>
+        <img :src="link.image" :alt="link.name">
+        <h4 v-if="showNames">{{ link.name }}</h4>
       </li>
     </ul>
   </section>
@@ -19,8 +25,17 @@
 <script>
 export default {
   props: {
+    showNames: {
+      type: Boolean,
+      default: true
+    },
     title: String,
-    partners: Array
+    links: Array,
+    background: {
+      type: String,
+      default: '#FFF'
+    },
+    layout: String
   },
   methods: {
     goToLink(link) {
@@ -57,6 +72,10 @@ export default {
   align-items: stretch;
   padding: 1em;
   overflow: hidden;
+}
+
+.mbfilmfest_partners.mbfilmfest_partners_instax li {
+  background: #fff;
   border: 1px solid rgba(99,99,99);
   box-shadow: 0 0 .2em .01em rgba(0,0,0,0.8);
   -webkit-box-shadow: 0 0 .2em .01em rgba(0,0,0,0.8);

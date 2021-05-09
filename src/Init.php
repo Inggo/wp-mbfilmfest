@@ -26,14 +26,14 @@ class Init
             'mbfilmfest_vendors',
             \plugins_url('dist/js/chunk-vendors.js', $this->plugin->plugin_dir),
             ['vue_runtime'],
-            '0.2.1',
+            '0.2.2',
             true
         );
         \wp_register_script(
             'mbfilmfest',
             \plugins_url('dist/js/app.js', $this->plugin->plugin_dir),
             ['vue_runtime', 'mbfilmfest_vendors'],
-            '0.2.1',
+            '0.2.2',
             true
         );
 
@@ -41,7 +41,7 @@ class Init
             'mbfilmfest',
             \plugins_url('/dist/css/app.css', $this->plugin->plugin_dir),
             [],
-            '0.2.1'
+            '0.2.2'
         );
 
         global $post;

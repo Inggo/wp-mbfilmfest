@@ -108,62 +108,94 @@ var mbfilmfest = {
             title: 'Australian Films on Netflix',
             image: 'https://via.placeholder.com/1920x960.png/' + randcolor() + '/' + randcolor() +  '?text=Australian+Films+on+Netflix',
             link: 'https://www.netflix.com/ph/browse/genre/100371',
-            height: '100vh'
-        },
-        {
-            id: 'promo-2',
-            title: 'SIP',
-            image: 'https://via.placeholder.com/1920x720.png/' + randcolor() + '/' + randcolor() +  '?text=SIP+Promo'
-        },
+            height: '100vh',
+            background: '#000000'
+        }
     ],
-    partners: [
+    links: [
         {
             id: 'partner-20',
             name: 'Sed ut perspiciatis',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Sip']
         },
         {
             id: 'partner-21',
             name: 'unde omnis iste',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Sip']
         },
         {
             id: 'partner-22',
             name: 'Sed ut perspiciatis',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Sip']
         },
         {
             id: 'partner-23',
             name: 'natus error sit voluptatem',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Sip']
         },
         {
             id: 'partner-24',
             name: 'accusantium doloremque laudantium',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Sip']
         },
         {
             id: 'partner-25',
             name: 'eaque ipsa quae ab illo',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Sip']
         },
         {
             id: 'partner-26',
             name: 'dolor sit amet, consectetur',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Partner']
         },
         {
             id: 'partner-27',
             name: 'aliquam quaerat voluptatem',
             image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev'
+            link: 'https://inggo.dev',
+            tags: ['Partner']
+        },
+        {
+            id: 'partner-28',
+            name: 'dolor sit amet, consectetur',
+            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
+            link: 'https://inggo.dev',
+            tags: ['Partner']
+        },
+        {
+            id: 'partner-29',
+            name: 'aliquam quaerat voluptatem',
+            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
+            link: 'https://inggo.dev',
+            tags: ['Partner']
+        },
+        {
+            id: 'partner-30',
+            name: 'dolor sit amet, consectetur',
+            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
+            link: 'https://inggo.dev',
+            tags: ['Partner']
+        },
+        {
+            id: 'partner-31',
+            name: 'aliquam quaerat voluptatem',
+            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
+            link: 'https://inggo.dev',
+            tags: ['Partner']
         }
     ]
 }

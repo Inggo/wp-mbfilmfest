@@ -111,7 +111,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100vw;
+  width: calc(100vw - (100vw - 100%));
   height: 100vh;
   background: rgba(0,0,0,.95);
   z-index: 110508;
@@ -121,7 +121,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100vw;
+  width: calc(100vw - (100vw - 100%));
   height: 100vh;
 }
 

@@ -4,6 +4,7 @@
     class="mbfilmfest_header"
     :class="link ? 'has-link' : ''"
     :style="{
+      backgroundColor: background,
       backgroundImage: 'url(' + image + ')',
       width: width,
       height: height
@@ -30,6 +31,10 @@ export default {
     height: {
       type: String,
       default: '50vh'
+    },
+    background: {
+      type: String,
+      default: '#FFF'
     }
   },
   methods: {

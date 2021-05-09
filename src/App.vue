@@ -7,7 +7,17 @@
       :title="promo.title"
       :link="promo.link ? promo.link : null"
       :key="promo.id"></MBFFHeader>
-    <MBFFPartners :partners="partners" title="Partners"></MBFFPartners>
+    <MBFFPartners
+      :links="sip"
+      title="Sip Promo"
+      background="#F9EFE1"
+      layout="instax"
+    ></MBFFPartners>
+    <MBFFPartners
+      :links="partners"
+      title="Partners"
+      :show-names="false"
+    ></MBFFPartners>
   </div>
 </template>
 
@@ -23,6 +33,14 @@ export default {
   },
   data() {
     return window.mbfilmfest // From wordpress
+  },
+  computed: {
+    sip() {
+      return this.links.filter(link => link.tags.includes('Sip'));
+    },
+    partners() {
+      return this.links.filter(link => link.tags.includes('Partner'));
+    }
   }
 }
 </script>

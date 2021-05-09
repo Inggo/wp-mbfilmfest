@@ -28,14 +28,14 @@ class Init
             'mbfilmfest_vendors',
             \plugins_url('dist/js/chunk-vendors.js', $this->plugin->plugin_dir),
             ['vue_runtime'],
-            '0.3.0',
+            '0.3.1',
             true
         );
         \wp_register_script(
             'mbfilmfest',
             \plugins_url('dist/js/app.js', $this->plugin->plugin_dir),
             ['vue_runtime', 'mbfilmfest_vendors'],
-            '0.3.0',
+            '0.3.1',
             true
         );
 
@@ -43,7 +43,7 @@ class Init
             'mbfilmfest',
             \plugins_url('/dist/css/app.css', $this->plugin->plugin_dir),
             [],
-            '0.3.0'
+            '0.3.1'
         );
 
         global $post;
@@ -92,6 +92,7 @@ class Init
                 ),
                 'menu_icon' => 'dashicons-format-video',
                 'public' => true,
+                'publicly_queryable'  => false,
                 'has_archive' => false,
                 'rewrite' => false,
                 'show_in_rest' => true,

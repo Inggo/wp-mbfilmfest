@@ -5,12 +5,26 @@
   ]">
     <h3>{{ title }}</h3>
     <ul>
-      <li v-for="film in films" :ref="film.id" :key="film.id" @click="playFilm(film.embed)">
+      <li 
+        v-for="film in films" 
+        ref="films" 
+        :key="film.id" 
+        @click="playFilm(film.embed)"
+        @mouseover="setFocusFilm(film.id)"
+        @mouseout="unfocusFilm(film.id)"
+        :class="{
+          mbfilmfest_focused_film: focusedOnFilm == film.id,
+          mbfilmfest_film_preload: !filmLoaded.includes(film.id),
+          mbfilmfest_film_loaded: filmLoaded.includes(film.id)
+        }"
+      >
         <div class="mbfilmfest_filmcover_container">
           <div class="mbfilmfest_filmcover" :style="{ backgroundImage: 'url(' + film.image + ')'}"></div>
         </div>
         <h4>{{ film.title }}</h4>
-        <p>{{ film.description }}</p>
+        <div class="mbfilmfest_description_container">
+          <p>{{ film.description }}</p>
+        </div>
       </li>
     </ul>
     <transition name="fade">
@@ -28,7 +42,7 @@
 export default {
   props: {
     title: String,
-    films: Object,
+    films: Array,
     layout: {
       type: String,
       default: "basic"
@@ -36,11 +50,28 @@ export default {
   },
   data() {
     return {
+      focusedOnFilm: false,
       playing: false,
-      currentEmbed: ''
+      currentEmbed: '',
+      filmLoaded: [],
+      filmHeights: []
+    }
+  },
+  computed: {
+    defaultHeight() {
+      return this.layout == 'featured' ? '442px' : '265px';
     }
   },
   methods: {
+    setFocusFilm(filmId) {
+      this.focusedOnFilm = filmId;
+      this.$refs.films[this.filmLoaded.indexOf(filmId)].style.height =
+        this.filmHeights[this.filmLoaded.indexOf(filmId)] + 'px';
+    },
+    unfocusFilm(filmId) {
+      this.focusedOnFilm = false;
+      this.$refs.films[this.filmLoaded.indexOf(filmId)].style.height = this.defaultHeight;
+    },
     playFilm(embed) {
       this.currentEmbed = embed;
       this.playing = true;
@@ -48,6 +79,16 @@ export default {
     stopFilm() {
       this.playing = false;
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.films.forEach((film, index) => {
+        this.$refs.films[index].style.height = 'auto';
+        this.filmHeights.push(this.$refs.films[index].clientHeight);
+        this.$refs.films[index].style.height = this.defaultHeight;
+        this.filmLoaded.push(film.id);
+      });
+    });
   }
 }
 </script>
@@ -74,6 +115,12 @@ export default {
   box-shadow: 0 0 .5em .01em rgba(0,0,0,0.8);
   -webkit-box-shadow: 0 0 .5em .01em rgba(0,0,0,0.8);
   -moz-box-shadow: 0 0 .5em .01em rgba(0,0,0,0.8);
+  transition: height 0.4s ease-out;
+  height: 265px;
+}
+
+.mbfilmfest_featurefilms.mbfilmfest_films li {
+  height: 442px;
 }
 
 .mbfilmfest_films li:hover {
@@ -145,6 +192,26 @@ export default {
   line-height: 48px;
   padding: 0;
   opacity: .2;
+}
+
+.mbfilmfest_film_preload .mbfilmfest_description_container,
+.mbfilmfest_focused_film .mbfilmfest_description_container {
+  height: auto;
+}
+
+.mbfilmfest_focused_film .mbfilmfest_description_container p {
+  white-space: unset;
+  overflow: visible;
+}
+
+.mbfilmfest_description_container {
+  height: 2rem;
+}
+
+.mbfilmfest_film_loaded:not(.mbfilmfest_focused_film) .mbfilmfest_description_container p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .mbfilmfest_close_player:hover {

@@ -25,7 +25,7 @@ var mbfilmfest = {
                 title: 'Aenean commodo',
                 description: 'Aenean commodo ligula eget dolor. Aenean massa',
                 image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                embed: '<iframe src="https://player.vimeo.com/video/152985022" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
                 tags: ['Feature Films', 'Short Films']
             },
             {
@@ -41,7 +41,7 @@ var mbfilmfest = {
                 title: 'Donec quam felis',
                 description: 'Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.',
                 image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                embed: '<iframe src="https://player.vimeo.com/video/152985022" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
                 tags: ['Feature Films']
             },
             {
@@ -65,7 +65,7 @@ var mbfilmfest = {
                 title: 'In enim justo',
                 description: 'In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.',
                 image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+                embed: '<iframe src="https://player.vimeo.com/video/152985022" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
                 tags: ['Short Films']
             },
             {

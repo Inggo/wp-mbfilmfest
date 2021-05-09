@@ -115,8 +115,9 @@ export default {
   box-shadow: 0 0 .5em .01em rgba(0,0,0,0.8);
   -webkit-box-shadow: 0 0 .5em .01em rgba(0,0,0,0.8);
   -moz-box-shadow: 0 0 .5em .01em rgba(0,0,0,0.8);
-  transition: height 0.4s ease-out;
+  transition: height 0.4s ease-out, transform 0.4s ease-out;
   height: 265px;
+  transform: scale(0.9);
 }
 
 .mbfilmfest_featurefilms.mbfilmfest_films li {
@@ -149,7 +150,11 @@ export default {
 }
 
 .mbfilmfest_films li:hover .mbfilmfest_filmcover {
-  transform: scale(1.25);
+  transform: scale(1.1);
+}
+
+.mbfilmfest_films li:hover {
+  transform: scale(1);
 }
 
 .mbfilmfest_player {

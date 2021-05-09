@@ -1,4 +1,14 @@
-﻿<div id="mbfilmfest_view"></div>
+﻿<?php
+
+// Load all films
+$mbff_films = \get_posts([
+    'post_type'     => 'mbfilmfest_film',
+    'numberposts'   => -1,
+    'orderby'       => 'menu_order',
+    'order'         => 'ASC'
+]);
+
+?><div id="mbfilmfest_view"></div>
 
 <script>
 function randcolor()
@@ -12,94 +22,21 @@ var mbfilmfest = {
     },
     contents: {
         films: [
+<?php foreach ($mbff_films as $film): ?>
             {
-                id: 1,
-                title: 'Lorem ipsum',
-                description: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Feature Films', 'Short Films']
+                id: <?= json_encode($film->ID) ?>,
+                title: <?= json_encode($film->post_title) ?>,
+                description: <?= json_encode($film->description) ?>,
+                image: <?= json_encode(\get_the_post_thumbnail_url($film, 'full')) ?>,
+                embed: <?= json_encode($film->embed_code) ?>,
+                tags: [<?php
+                $tags = \get_the_tags($film);
+                foreach ($tags as $tag):
+                    echo json_encode($tag->name) . ",";
+                endforeach;
+                ?>]
             },
-            {
-                id: 2,
-                title: 'Aenean commodo',
-                description: 'Aenean commodo ligula eget dolor. Aenean massa',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://player.vimeo.com/video/152985022" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Feature Films', 'Short Films']
-            },
-            {
-                id: 3,
-                title: 'Cum sociis natoque',
-                description: 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Feature Films']
-            },
-            {
-                id: 4,
-                title: 'Donec quam felis',
-                description: 'Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://player.vimeo.com/video/152985022" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Feature Films']
-            },
-            {
-                id: 5,
-                title: 'Nulla consequat',
-                description: 'Nulla consequat massa quis enim..',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Feature Films', 'Short Films']
-            },
-            {
-                id: 6,
-                title: 'Donec pede justo',
-                description: 'Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Short Films']
-            },
-            {
-                id: 7,
-                title: 'In enim justo',
-                description: 'In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://player.vimeo.com/video/152985022" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Short Films']
-            },
-            {
-                id: 8,
-                title: 'Nullam dictum felis',
-                description: 'Nullam dictum felis eu pede mollis pretium. Integer tincidunt.',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Short Films']
-            },
-            {
-                id: 9,
-                title: 'Cras dapibus',
-                description: 'Cras dapibus. Vivamus elementum semper nisi.',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Short Films']
-            },
-            {
-                id: 10,
-                title: 'Aenean vulputate',
-                description: 'Aenean vulputate eleifend tellus.',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Short Films']
-            },
-            {
-                id: 11,
-                title: 'Aenean leo ligula',
-                description: 'Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,',
-                image: 'https://via.placeholder.com/1920x1080.png/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-                embed: '<iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-                tags: ['Short Films']
-            }
+<?php endforeach; ?>
         ]
     },
     promos: [

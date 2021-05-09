@@ -1,25 +1,29 @@
 ﻿<template>
-  <section
-    class="mbfilmfest_partners"
-    :class="layout == 'instax' ? 'mbfilmfest_partners_instax' : null"
+  <div
+    class="mbfilmfest_links_container"
     :style="{
       backgroundColor: background
     }"
   >
-    <h3 v-if="title">{{ title }}</h3>
-    <ul>
-      <li 
-        v-for="link in links" 
-        :key="link.id" 
-        :ref="link.id"
-        @click="goToLink(link.link)"
-        :style="layout == 'instax' ? randomRot() : null"
-      >
-        <img :src="link.image" :alt="link.name">
-        <h4 v-if="showNames">{{ link.name }}</h4>
-      </li>
-    </ul>
-  </section>
+    <section
+      class="mbfilmfest_links"
+      :class="layout == 'instax' ? 'mbfilmfest_links_instax' : null"
+    >
+      <h3 v-if="title">{{ title }}</h3>
+      <ul>
+        <li 
+          v-for="link in links" 
+          :key="link.id" 
+          :ref="link.id"
+          @click="goToLink(link.link)"
+          :style="layout == 'instax' ? randomRot() : null"
+        >
+          <img :src="link.image" :alt="link.name">
+          <h4 v-if="showNames">{{ link.name }}</h4>
+        </li>
+      </ul>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -54,7 +58,7 @@ export default {
 </script>
 
 <style>
-.mbfilmfest_partners ul {
+.mbfilmfest_links ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +66,7 @@ export default {
   align-items: flex-start;
 }
 
-.mbfilmfest_partners li {
+.mbfilmfest_links li {
   width: 20%;
   display: block;
   position: relative;
@@ -74,7 +78,7 @@ export default {
   overflow: hidden;
 }
 
-.mbfilmfest_partners.mbfilmfest_partners_instax li {
+.mbfilmfest_links.mbfilmfest_links_instax li {
   background: #fff;
   border: 1px solid rgba(99,99,99);
   box-shadow: 0 0 .2em .01em rgba(0,0,0,0.8);
@@ -82,7 +86,7 @@ export default {
   -moz-box-shadow: 0 0 .2em .01em rgba(0,0,0,0.8);
 }
 
-.mbfilmfest_partners li:hover {
+.mbfilmfest_links li:hover {
   cursor: pointer;
   transform: rotate(0) !important;
 }

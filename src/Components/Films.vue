@@ -25,6 +25,9 @@
         <div class="mbfilmfest_description_container">
           <p v-html="film.description.replace(/\r/g,'').replace(/\n/g,'<br>')"></p>
         </div>
+        <div class="mbfilmfest_play_button" 
+          :style="{ backgroundImage: 'url(' + baseUrl + 'play.svg)'}">
+        </div>
       </li>
     </ul>
     <transition name="fade">
@@ -54,7 +57,8 @@ export default {
       playing: false,
       currentEmbed: '',
       filmLoaded: [],
-      filmHeights: []
+      filmHeights: [],
+      baseUrl: window.mbfilmfest.baseUrl + 'src/assets/'
     }
   },
   computed: {
@@ -75,10 +79,13 @@ export default {
       // this.$refs.films[this.filmLoaded.indexOf(filmId)].style.height = this.defaultHeight;
     },
     playFilm(embed) {
+      document.body.classList.add("mbfilmfest_film_playing");
       this.currentEmbed = embed;
       this.playing = true;
     },
     stopFilm() {
+      document.body.classList.remove("mbfilmfest_film_playing");
+      this.currentEmbed = null;
       this.playing = false;
     }
   },
@@ -98,6 +105,10 @@ export default {
 </script>
 
 <style>
+.mbfilmfest_film_playing {
+  overflow: hidden;
+}
+
 .mbfilmfest_films ul {
   list-style: none;
   display: flex;
@@ -201,6 +212,31 @@ export default {
   line-height: 48px;
   padding: 0;
   opacity: .2;
+}
+
+.mbfilmfest_play_button {
+  font-size: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 250px;
+  background-color: rgba(255,255,255,0.1);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 125px;
+  z-index: 100;
+  transition: opacity .4s;
+  opacity: 0;
+}
+
+.mbfilmfest_featurefilms .mbfilmfest_play_button {
+  height: 500px;
+  background-size: 200px;
+}
+
+.mbfilmfest_focused_film .mbfilmfest_play_button {
+  opacity: .8;
 }
 
 .mbfilmfest_film_preload .mbfilmfest_description_container,

@@ -17,6 +17,7 @@ function randcolor()
 }
 
 var mbfilmfest = {
+    baseUrl: <?= json_encode(\plugin_dir_url($this->plugin->plugin_dir)) ?>,
     header: {
         image: "https://via.placeholder.com/1920x720.png/000000/FFFFFF?text=Header+Image"
     },

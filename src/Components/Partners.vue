@@ -10,6 +10,7 @@
       :class="layout == 'instax' ? 'mbfilmfest_links_instax' : null"
     >
       <h3 v-if="title">{{ title }}</h3>
+      <div v-html="description" v-if="description"></div>
       <ul>
         <li 
           v-for="link in links" 
@@ -34,6 +35,7 @@ export default {
       default: true
     },
     title: String,
+    description: String,
     links: Array,
     background: {
       type: String,
@@ -64,6 +66,8 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
+  margin: 0;
+  padding: 0;
 }
 
 .mbfilmfest_links li {

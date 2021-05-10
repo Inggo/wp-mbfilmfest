@@ -1,4 +1,6 @@
 ﻿<?php
+// We will use the $post global for settings
+global $post;
 
 // Load all films
 $mbff_films = \get_posts([
@@ -23,13 +25,29 @@ var mbfilmfest = {
     },
     contents: {
         films: [
-<?php foreach ($mbff_films as $film): ?>
+<?php foreach ($mbff_films as $film):
+    $oembed = get_field('video_oembed', $film->ID);
+    $matches = null;
+    preg_match('/src="(.+?)"/', $oembed, $matches);
+    $src = $matches[1];
+    $params = array(
+        'autoplay'  => 1,
+        'hd'        => 1,
+        'autohide'  => 1
+    );
+    $new_src = add_query_arg($params, $src);
+    $oembed = str_replace($src, $new_src, $oembed);
+
+    $attributes = 'frameborder="0"';
+    $oembed = str_replace('></iframe>', ' ' . $attributes . '></iframe>', $oembed);
+    ?>
             {
                 id: <?= json_encode($film->ID) ?>,
                 title: <?= json_encode($film->post_title) ?>,
+                screening_time: <?= json_encode($film->screening_time) ?>,
                 description: <?= json_encode($film->description) ?>,
                 image: <?= json_encode(\get_the_post_thumbnail_url($film, 'full')) ?>,
-                embed: <?= json_encode($film->embed_code) ?>,
+                embed: <?= json_encode($oembed) ?>,
                 tags: [<?php
                 $tags = \get_the_tags($film);
                 foreach ($tags as $tag):
@@ -135,6 +153,18 @@ var mbfilmfest = {
             link: 'https://inggo.dev',
             tags: ['Partner']
         }
-    ]
+    ],
+    settings: {
+        primaryLinksTitle: <?= json_encode(\get_field('primary_links_title')); ?>,
+        primaryLinksDescription: <?= json_encode(\get_field('primary_links_description')); ?>,
+        primaryLinksFormat: <?= json_encode(\get_field('primary_links_format')); ?>,
+        primaryLinksFilter: <?= json_encode(\get_field('primary_links_tag_filter')); ?>,
+        primaryLinksBackground: <?= json_encode(\get_field('primary_links_background_color')); ?>,
+        secondaryLinksTitle: <?= json_encode(\get_field('secondary_links_title')); ?>,
+        secondaryLinksDescription: <?= json_encode(\get_field('secondary_links_description')); ?>,
+        secondaryLinksFormat: <?= json_encode(\get_field('secondary_links_format')); ?>,
+        secondaryLinksFilter: <?= json_encode(\get_field('secondary_links_tag_filter')); ?>,
+        secondaryLinksBackground: <?= json_encode(\get_field('secondary_links_background_color')); ?>
+    }
 }
 </script>

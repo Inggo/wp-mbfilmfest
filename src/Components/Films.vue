@@ -23,6 +23,7 @@
         </div>
         <h4>{{ film.title }}</h4>
         <div class="mbfilmfest_description_container">
+          <p class="mbfilmfest_description_screentime" v-if="film.screening_time">{{ film.screening_time }}</p>
           <p v-html="film.description.replace(/\r/g,'').replace(/\n/g,'<br>')"></p>
         </div>
         <div class="mbfilmfest_play_button" 
@@ -118,6 +119,7 @@ export default {
 }
 
 .mbfilmfest_films li {
+  font-size: 1.2rem;
   width: 33%;
   display: block;
   position: relative;
@@ -193,13 +195,19 @@ export default {
 }
 
 .mbfilmfest_embed {
-  width: 90vw;
+  position: relative;
+  width: calc(100vw - (100vw - 100%));
   height: 90vh;
 }
 
-.mbfilmfest_embed iframe {
-  width: 100%;
-  height: 100%;
+.mbfilmfest_embed iframe,
+.mbfilmfest_embed object,
+.mbfilmfest_embed embed { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .mbfilmfest_close_player {
@@ -211,7 +219,8 @@ export default {
   font-size: 24px;
   line-height: 48px;
   padding: 0;
-  opacity: .2;
+  opacity: .1;
+  z-index: 11;
 }
 
 .mbfilmfest_play_button {
@@ -254,6 +263,10 @@ export default {
   height: 2rem;
   */
   height: auto;
+}
+
+.mbfilmfest_description_screentime {
+  font-weight: bold;
 }
 
 /*

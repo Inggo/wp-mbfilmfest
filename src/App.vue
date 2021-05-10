@@ -8,15 +8,18 @@
       :link="promo.link ? promo.link : null"
       :key="promo.id"></MBFFHeader>
     <MBFFPartners
-      :links="sip"
-      title="Sip Promo"
-      background="#F9EFE1"
-      layout="instax"
+      :links="primaryLinks"
+      :title="settings.primaryLinksTitle"
+      :description="settings.primaryLinksDescription"
+      :background="settings.primaryLinksBackground"
+      :layout="settings.primaryLinksFormat"
     ></MBFFPartners>
     <MBFFPartners
-      :links="partners"
-      title="Partners"
-      :show-names="false"
+      :links="secondaryLinks"
+      :title="settings.secondaryLinksTitle"
+      :description="settings.secondaryLinksDescription"
+      :background="settings.secondaryLinksBackground"
+      :layout="settings.secondaryLinksFormat"
     ></MBFFPartners>
   </div>
 </template>
@@ -35,11 +38,11 @@ export default {
     return window.mbfilmfest // From wordpress
   },
   computed: {
-    sip() {
-      return this.links.filter(link => link.tags.includes('Sip'));
+    primaryLinks() {
+      return this.links.filter(link => link.tags.includes(this.secondaryLinksFilter ? this.secondaryLinksFilter : 'Sip'));
     },
-    partners() {
-      return this.links.filter(link => link.tags.includes('Partner'));
+    secondaryLinks() {
+      return this.links.filter(link => link.tags.includes(this.secondaryLinksFilter ? this.secondaryLinksFilter : 'Partner'));
     }
   }
 }

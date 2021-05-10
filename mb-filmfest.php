@@ -41,3 +41,4 @@ $updater->setRepository('wp-mbfilmfest');
 
 // Initialize plugin
 new Init($plugin);
+

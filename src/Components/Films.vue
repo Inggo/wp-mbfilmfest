@@ -23,7 +23,7 @@
         </div>
         <h4>{{ film.title }}</h4>
         <div class="mbfilmfest_description_container">
-          <p v-html="film.description"></p>
+          <p v-html="film.description.replace('\r','').replace('\n','<br>')"></p>
         </div>
       </li>
     </ul>

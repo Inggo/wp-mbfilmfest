@@ -113,6 +113,7 @@ class Init
                     'label' => 'Description',
                     'name' => 'description',
                     'type' => 'textarea',
+                    'new_lines' => 'br',
                 ),
                 array (
                     'key' => 'field_2',

@@ -1,48 +1,50 @@
 <template>
   <div class="mbfilmfest_container">
-    <MBFFHeader :image="header.image"></MBFFHeader>
+    <MBFFBanners :banners="contents.primaryBanners"></MBFFBanners>
     <MBFFContents :films="contents.films"></MBFFContents>
-    <MBFFHeader v-for="promo in promos"
-      :image="promo.image"
-      :title="promo.title"
-      :link="promo.link ? promo.link : null"
-      :key="promo.id"></MBFFHeader>
-    <MBFFPartners
+    <MBFFBanners :banners="contents.secondaryBanners"></MBFFBanners>
+    <MBFFLinks
       :links="primaryLinks"
       :title="settings.primaryLinksTitle"
       :description="settings.primaryLinksDescription"
       :background="settings.primaryLinksBackground"
       :layout="settings.primaryLinksFormat"
-    ></MBFFPartners>
-    <MBFFPartners
+      :showNames="settings.showPrimaryLinkNames"
+    ></MBFFLinks>
+    <MBFFLinks
       :links="secondaryLinks"
       :title="settings.secondaryLinksTitle"
       :description="settings.secondaryLinksDescription"
       :background="settings.secondaryLinksBackground"
       :layout="settings.secondaryLinksFormat"
-    ></MBFFPartners>
+      :showNames="settings.showSecondaryLinkNames"
+    ></MBFFLinks>
   </div>
 </template>
 
 <script>
-import { default as MBFFHeader } from './Components/Header';
+import { default as MBFFBanners } from './Components/Banners';
 import { default as MBFFContents } from './Components/Contents';
-import { default as MBFFPartners } from './Components/Partners';
+import { default as MBFFLinks } from './Components/Links';
 
 export default {
   name: 'App',
   components: {
-    MBFFHeader, MBFFContents, MBFFPartners
+    MBFFBanners, MBFFContents, MBFFLinks
   },
   data() {
     return window.mbfilmfest // From wordpress
   },
   computed: {
     primaryLinks() {
-      return this.links.filter(link => link.tags.includes(this.secondaryLinksFilter ? this.secondaryLinksFilter : 'Sip'));
+      return this.settings.primaryLinksFilter
+        ? this.contents.links.filter(link => link.tags.includes(this.settings.primaryLinksFilter))
+        : this.contents.links;
     },
     secondaryLinks() {
-      return this.links.filter(link => link.tags.includes(this.secondaryLinksFilter ? this.secondaryLinksFilter : 'Partner'));
+      return this.settings.secondaryLinksFilter
+        ? this.contents.links.filter(link => link.tags.includes(this.settings.secondaryLinksFilter))
+        : this.contents.links;
     }
   }
 }

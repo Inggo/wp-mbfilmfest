@@ -10,6 +10,61 @@ $mbff_films = \get_posts([
     'order'         => 'ASC'
 ]);
 
+// Load all links
+$mbff_links = \get_posts([
+    'post_type'     => 'mbfilmfest_link',
+    'numberposts'   => -1,
+    'orderby'       => 'menu_order',
+    'order'         => 'ASC'
+]);
+
+// Load all primary banners (based on primary_banners_tag_filter)
+$mbff_primary_banners = \get_posts([
+    'post_type'     => 'mbfilmfest_banner',
+    'numberposts'   => -1,
+    'orderby'       => 'menu_order',
+    'order'         => 'ASC',
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'post_tag',
+            'field'    => 'term_id',
+            'terms'    => \get_field('primary_banners_tag_filter')
+        )
+    )
+]);
+
+// Load all secondary banners (based on secondary_banners_tag_filter)
+$mbff_secondary_banners = \get_posts([
+    'post_type'     => 'mbfilmfest_banner',
+    'numberposts'   => -1,
+    'orderby'       => 'menu_order',
+    'order'         => 'ASC',
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'post_tag',
+            'field'    => 'term_id',
+            'terms'    => \get_field('secondary_banners_tag_filter')
+        )
+    )
+]);
+
+// Helper function to print Banner JSON
+function printBannersJSON($banners) {
+    foreach ($banners as $banner) : ?>
+        {
+                id: <?= json_encode($banner->ID) ?>,
+                title: <?= json_encode($banner->post_title) ?>,
+                image: <?= json_encode(\get_the_post_thumbnail_url($banner, 'full')) ?>,
+                link: <?= json_encode(\get_field('banner_link', $banner->ID)) ?>,
+                height: <?= json_encode(\get_field('height', $banner->ID)) ?>,
+                background: <?= json_encode(\get_field('background_color', $banner->ID)) ?>,
+                newWindow: <?= json_encode(\get_field('new_window', $banner->ID)) ?>
+
+            },
+    <?php
+    endforeach;
+}
+
 ?><div id="mbfilmfest_view"></div>
 
 <script>
@@ -20,10 +75,10 @@ function randcolor()
 
 var mbfilmfest = {
     baseUrl: <?= json_encode(\plugin_dir_url($this->plugin->plugin_dir)) ?>,
-    header: {
-        image: "https://via.placeholder.com/1920x720.png/000000/FFFFFF?text=Header+Image"
-    },
     contents: {
+        primaryBanners: [
+    <?php printBannersJSON($mbff_primary_banners); ?>
+    ],
         films: [
 <?php foreach ($mbff_films as $film):
     $oembed = get_field('video_oembed', $film->ID);
@@ -50,121 +105,46 @@ var mbfilmfest = {
                 embed: <?= json_encode($oembed) ?>,
                 tags: [<?php
                 $tags = \get_the_tags($film);
-                foreach ($tags as $tag):
-                    echo json_encode($tag->name) . ",";
+                foreach ($tags as $i => $tag):
+                    echo ($i > 0 ? "," : '') . json_encode($tag->name);
+                endforeach;
+                ?>]
+            },
+<?php endforeach; ?>
+        ],
+        secondaryBanners: [
+    <?php printBannersJSON($mbff_secondary_banners); ?>
+    ],
+        links: [
+<?php foreach ($mbff_links as $link): ?>
+            {
+                id: <?= json_encode($link->ID) ?>,
+                name: <?= json_encode($link->post_title) ?>,
+                image: <?= json_encode(\get_the_post_thumbnail_url($film, 'full')) ?>,
+                link: <?= json_encode($link->link_url) ?>,
+                tags: [<?php
+                $tags = \get_the_tags($link);
+                foreach ($tags as $i => $tag):
+                    echo ($i > 0 ? "," : '') . json_encode($tag->term_id);
                 endforeach;
                 ?>]
             },
 <?php endforeach; ?>
         ]
     },
-    promos: [
-        {
-            id: 'promo-1',
-            title: 'Australian Films on Netflix',
-            image: 'https://via.placeholder.com/1920x960.png/' + randcolor() + '/' + randcolor() +  '?text=Australian+Films+on+Netflix',
-            link: 'https://www.netflix.com/ph/browse/genre/100371',
-            height: '100vh',
-            background: '#000000'
-        }
-    ],
-    links: [
-        {
-            id: 'partner-20',
-            name: 'Sed ut perspiciatis',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Sip']
-        },
-        {
-            id: 'partner-21',
-            name: 'unde omnis iste',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Sip']
-        },
-        {
-            id: 'partner-22',
-            name: 'Sed ut perspiciatis',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Sip']
-        },
-        {
-            id: 'partner-23',
-            name: 'natus error sit voluptatem',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Sip']
-        },
-        {
-            id: 'partner-24',
-            name: 'accusantium doloremque laudantium',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Sip']
-        },
-        {
-            id: 'partner-25',
-            name: 'eaque ipsa quae ab illo',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Sip']
-        },
-        {
-            id: 'partner-26',
-            name: 'dolor sit amet, consectetur',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Partner']
-        },
-        {
-            id: 'partner-27',
-            name: 'aliquam quaerat voluptatem',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Partner']
-        },
-        {
-            id: 'partner-28',
-            name: 'dolor sit amet, consectetur',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Partner']
-        },
-        {
-            id: 'partner-29',
-            name: 'aliquam quaerat voluptatem',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Partner']
-        },
-        {
-            id: 'partner-30',
-            name: 'dolor sit amet, consectetur',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Partner']
-        },
-        {
-            id: 'partner-31',
-            name: 'aliquam quaerat voluptatem',
-            image: 'https://via.placeholder.com/600/' + randcolor() + '/' + randcolor() + '?text=Placeholder',
-            link: 'https://inggo.dev',
-            tags: ['Partner']
-        }
-    ],
     settings: {
         primaryLinksTitle: <?= json_encode(\get_field('primary_links_title')); ?>,
         primaryLinksDescription: <?= json_encode(\get_field('primary_links_description')); ?>,
         primaryLinksFormat: <?= json_encode(\get_field('primary_links_format')); ?>,
-        primaryLinksFilter: <?= json_encode(\get_field('primary_links_tag_filter')); ?>,
+        primaryLinksFilter: <?= json_encode(\get_field('primary_links_tag_filter') ? \get_field('primary_links_tag_filter')->term_id : null); ?>,
         primaryLinksBackground: <?= json_encode(\get_field('primary_links_background_color')); ?>,
+        showPrimaryLinkNames: <?= json_encode(\get_field('show_primary_link_names')); ?>,
         secondaryLinksTitle: <?= json_encode(\get_field('secondary_links_title')); ?>,
         secondaryLinksDescription: <?= json_encode(\get_field('secondary_links_description')); ?>,
         secondaryLinksFormat: <?= json_encode(\get_field('secondary_links_format')); ?>,
-        secondaryLinksFilter: <?= json_encode(\get_field('secondary_links_tag_filter')); ?>,
-        secondaryLinksBackground: <?= json_encode(\get_field('secondary_links_background_color')); ?>
+        secondaryLinksFilter: <?= json_encode(\get_field('secondary_links_tag_filter') ? \get_field('secondary_links_tag_filter')->term_id : null); ?>,
+        secondaryLinksBackground: <?= json_encode(\get_field('secondary_links_background_color')); ?>,
+        showSecondaryLinkNames: <?= json_encode(\get_field('show_secondary_link_names')); ?>,
     }
 }
 </script>

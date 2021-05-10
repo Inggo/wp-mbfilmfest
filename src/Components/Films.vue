@@ -23,7 +23,7 @@
         </div>
         <h4>{{ film.title }}</h4>
         <div class="mbfilmfest_description_container">
-          <p>{{ film.description }}</p>
+          <p v-html="film.description"></p>
         </div>
       </li>
     </ul>

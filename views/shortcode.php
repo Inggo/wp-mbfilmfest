@@ -2,6 +2,26 @@
 // We will use the $post global for settings
 global $post;
 
+if (!function_exists('printBannersJSON')) {
+    // Helper function to print Banner JSON
+    function printBannersJSON($banners) {
+        foreach ($banners as $banner) : ?>
+        {
+                id: <?= json_encode($banner->ID) ?>,
+                title: <?= json_encode($banner->post_title) ?>,
+                image: <?= json_encode(\get_the_post_thumbnail_url($banner, 'full')) ?>,
+                link: <?= json_encode(\get_field('banner_link', $banner->ID)) ?>,
+                width: <?= json_encode((int)\get_field('width', $banner->ID)) ?>,
+                height: <?= json_encode((int)\get_field('height', $banner->ID)) ?>,
+                background: <?= json_encode(\get_field('background_color', $banner->ID)) ?>,
+                newWindow: <?= json_encode(\get_field('new_window', $banner->ID)) ?>
+
+            },
+        <?php
+        endforeach;
+    }
+}
+
 // Load all films
 $mbff_films = \get_posts([
     'post_type'     => 'mbfilmfest_film',
@@ -47,24 +67,6 @@ $mbff_secondary_banners = \get_posts([
         )
     )
 ]);
-
-// Helper function to print Banner JSON
-function printBannersJSON($banners) {
-    foreach ($banners as $banner) : ?>
-        {
-                id: <?= json_encode($banner->ID) ?>,
-                title: <?= json_encode($banner->post_title) ?>,
-                image: <?= json_encode(\get_the_post_thumbnail_url($banner, 'full')) ?>,
-                link: <?= json_encode(\get_field('banner_link', $banner->ID)) ?>,
-                width: <?= json_encode((int)\get_field('width', $banner->ID)) ?>,
-                height: <?= json_encode((int)\get_field('height', $banner->ID)) ?>,
-                background: <?= json_encode(\get_field('background_color', $banner->ID)) ?>,
-                newWindow: <?= json_encode(\get_field('new_window', $banner->ID)) ?>
-
-            },
-    <?php
-    endforeach;
-}
 
 ?><div id="mbfilmfest_view"></div>
 

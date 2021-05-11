@@ -56,7 +56,8 @@ function printBannersJSON($banners) {
                 title: <?= json_encode($banner->post_title) ?>,
                 image: <?= json_encode(\get_the_post_thumbnail_url($banner, 'full')) ?>,
                 link: <?= json_encode(\get_field('banner_link', $banner->ID)) ?>,
-                height: <?= json_encode(\get_field('height', $banner->ID)) ?>,
+                width: <?= json_encode((int)\get_field('width', $banner->ID)) ?>,
+                height: <?= json_encode((int)\get_field('height', $banner->ID)) ?>,
                 background: <?= json_encode(\get_field('background_color', $banner->ID)) ?>,
                 newWindow: <?= json_encode(\get_field('new_window', $banner->ID)) ?>
 
@@ -68,11 +69,6 @@ function printBannersJSON($banners) {
 ?><div id="mbfilmfest_view"></div>
 
 <script>
-function randcolor()
-{
-    return "" + ((1<<24)*Math.random() | 0).toString(16);
-}
-
 var mbfilmfest = {
     baseUrl: <?= json_encode(\plugin_dir_url($this->plugin->plugin_dir)) ?>,
     contents: {

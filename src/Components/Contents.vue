@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .mbfilmfest_body {
   margin: 0 auto;
   max-width: 1140px;

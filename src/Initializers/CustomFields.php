@@ -434,8 +434,8 @@ class CustomFields
                     'key' => 'field_6099444070f44',
                     'label' => 'Height',
                     'name' => 'height',
-                    'type' => 'text',
-                    'instructions' => 'Input the height of the banner. Must be a valid CSS height value (px, vh, em, %, or auto).',
+                    'type' => 'number',
+                    'instructions' => 'Input the height of the banner in pixels',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -443,11 +443,34 @@ class CustomFields
                         'class' => '',
                         'id' => '',
                     ),
-                    'default_value' => '50vh',
+                    'default_value' => '',
                     'placeholder' => '',
                     'prepend' => '',
                     'append' => '',
-                    'maxlength' => '',
+                    'min' => 0,
+                    'max' => '',
+                    'step' => 1,
+                ),
+                array(
+                    'key' => 'field_6099699044a45',
+                    'label' => 'Width',
+                    'name' => 'width',
+                    'type' => 'number',
+                    'instructions' => 'Input the width of the banner in pixels',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'default_value' => '',
+                    'placeholder' => '',
+                    'prepend' => '',
+                    'append' => '',
+                    'min' => 0,
+                    'max' => '',
+                    'step' => 1,
                 ),
                 array(
                     'key' => 'field_6099442a70f43',
@@ -501,7 +524,7 @@ class CustomFields
             'hide_on_screen' => '',
             'active' => true,
             'description' => '',
-        ));        
+        ));
     }
 
     public function initLinkInfoCFs()

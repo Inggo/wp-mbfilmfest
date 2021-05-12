@@ -19,7 +19,9 @@ class Shortcodes
     {
         \wp_register_script(
             'vue_runtime',
-            'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js',
+            wp_get_environment_type() === 'production'
+                ? 'https://cdn.jsdelivr.net/npm/vue@2.6.12'
+                : 'https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js',
             [],
             '2.6.12'
         );

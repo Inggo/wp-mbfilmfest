@@ -84,7 +84,6 @@ export default {
   align-items: stretch;
   padding: 1em;
   overflow: hidden;
-  display: flex;
   align-items: center;
 }
 
@@ -107,6 +106,7 @@ export default {
 .mbfilmfest_links:not(.mbfilmfest_links_instax) .mbfilmfest_links_contents li {
   opacity: .9;
   transform: scale(.9);
+  display: flex;
 }
 
 .mbfilmfest_links:not(.mbfilmfest_links_instax) .mbfilmfest_links_contents li:hover {

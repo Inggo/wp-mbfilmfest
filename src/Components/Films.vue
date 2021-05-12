@@ -85,7 +85,8 @@ export default {
   },
   computed: {
     defaultHeight() {
-      return (this.filmcoverHeight + 78) + 'px';
+      let contentHeight = document.documentElement.clientWidth < 1366 ? 78 : 90;
+      return (this.filmcoverHeight + contentHeight) + 'px';
     },
     isMobile() {
       return isMobile();
@@ -108,7 +109,7 @@ export default {
           : (document.documentElement.clientWidth / 1.777776) / 2;
       } else {
         // 33% width
-        height = this.layout == 'featured' ? 500 : 225;
+        height = this.layout == 'featured' ? 500 : 210;
       }
       this.filmcoverHeight = height;
     },
@@ -205,23 +206,6 @@ body.mbfilmfest_film_playing {
 
 .mbfilmfest_film_loaded {
   transform: scale(0.95);
-}
-
-@media screen and (min-width: 500px) {
-  .mbfilmfest_films li {
-    width: 50%;
-  }
-}
-
-@media screen and (min-width: 800px) {
-  .mbfilmfest_films li {
-    width: 30%;
-  }
-
-  .mbfilmfest_films li:nth-child(3n + 2) {
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
 .mbfilmfest_films li:hover {
@@ -366,6 +350,29 @@ body.mbfilmfest_film_playing {
 
 .mbfilmfest_close_player:hover {
   opacity: 1;
+}
+
+@media screen and (min-width: 500px) {
+  .mbfilmfest_films li {
+    width: 50%;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .mbfilmfest_films li {
+    width: 30%;
+  }
+
+  .mbfilmfest_films li:nth-child(3n + 2) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 1366px) {
+  .mbfilmfest_description_container {
+    height: 90px;
+  }
 }
 
 .fade-enter-active,

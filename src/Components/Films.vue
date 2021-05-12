@@ -109,7 +109,7 @@ export default {
           : (document.documentElement.clientWidth / 1.777776) / 2;
       } else {
         // 33% width
-        height = this.layout == 'featured' ? 500 : 210;
+        height = this.layout == 'featured' ? 500 : 191;
       }
       this.filmcoverHeight = height;
     },

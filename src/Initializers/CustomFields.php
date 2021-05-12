@@ -567,6 +567,6 @@ class CustomFields
             'hide_on_screen' => '',
             'active' => true,
             'description' => '',
-        ));        
+        ));
     }
 }

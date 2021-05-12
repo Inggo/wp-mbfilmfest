@@ -294,7 +294,7 @@ body.mbfilmfest_film_playing {
   top: 0;
   left: 0;
   width: 100%;
-  height: 250px;
+  height: 191px;
   background-color: rgba(255,255,255,0.1);
   background-repeat: no-repeat;
   background-position: center center;

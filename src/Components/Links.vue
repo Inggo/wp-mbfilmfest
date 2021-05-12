@@ -100,8 +100,12 @@ export default {
   cursor: pointer;
 }
 
+.mbfilmfest_links:not(.mbfilmfest_links_instax) .mbfilmfest_links_contents ul {
+  align-items: stretch;
+}
+
 .mbfilmfest_links:not(.mbfilmfest_links_instax) .mbfilmfest_links_contents li {
-  opacity: .5;
+  opacity: .9;
   transform: scale(.9);
 }
 

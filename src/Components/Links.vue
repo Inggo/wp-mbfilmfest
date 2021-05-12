@@ -79,11 +79,13 @@ export default {
   display: block;
   position: relative;
   margin: 0 1em 2em;
-  transition: transform 0.6s;
+  transition: transform 0.6s, opacity 0.3s;
   overflow: hidden;
   align-items: stretch;
   padding: 1em;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .mbfilmfest_links.mbfilmfest_links_instax .mbfilmfest_links_contents li {
@@ -96,6 +98,19 @@ export default {
 
 .mbfilmfest_links .mbfilmfest_links_contents li:hover {
   cursor: pointer;
+}
+
+.mbfilmfest_links:not(.mbfilmfest_links_instax) .mbfilmfest_links_contents li {
+  opacity: .5;
+  transform: scale(.9);
+}
+
+.mbfilmfest_links:not(.mbfilmfest_links_instax) .mbfilmfest_links_contents li:hover {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.mbfilmfest_links.mbfilmfest_links_instax .mbfilmfest_links_contents li:hover {
   transform: rotate(0) !important;
 }
 </style>

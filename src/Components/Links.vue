@@ -9,20 +9,24 @@
       class="mbfilmfest_links"
       :class="layout == 'instax' ? 'mbfilmfest_links_instax' : null"
     >
-      <h3 v-if="title">{{ title }}</h3>
-      <div v-html="description" v-if="description"></div>
-      <ul>
-        <li 
-          v-for="link in links" 
-          :key="link.id" 
-          :ref="link.id"
-          @click="goToLink(link.link)"
-          :style="layout == 'instax' ? randomRot() : null"
-        >
-          <img :src="link.image" :alt="link.name">
-          <h4 v-if="showNames">{{ link.name }}</h4>
-        </li>
-      </ul>
+      <div class="mbfilmfest_links_description">
+        <h3 v-if="title">{{ title }}</h3>
+        <div v-html="description" v-if="description"></div>
+      </div>
+      <div class="mbfilmfest_links_contents">
+        <ul>
+          <li 
+            v-for="link in links" 
+            :key="link.id" 
+            :ref="link.id"
+            @click="goToLink(link.link)"
+            :style="layout == 'instax' ? randomRot() : null"
+          >
+            <img :src="link.image" :alt="link.name">
+            <h4 v-if="showNames">{{ link.name }}</h4>
+          </li>
+        </ul>
+      </div>
     </section>
   </div>
 </template>
@@ -60,7 +64,7 @@ export default {
 </script>
 
 <style>
-.mbfilmfest_links ul {
+.mbfilmfest_links .mbfilmfest_links_contents ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +74,7 @@ export default {
   padding: 0;
 }
 
-.mbfilmfest_links li {
+.mbfilmfest_links .mbfilmfest_links_contents li {
   width: 20%;
   display: block;
   position: relative;
@@ -82,7 +86,7 @@ export default {
   overflow: hidden;
 }
 
-.mbfilmfest_links.mbfilmfest_links_instax li {
+.mbfilmfest_links.mbfilmfest_links_instax .mbfilmfest_links_contents li {
   background: #fff;
   border: 1px solid rgba(99,99,99);
   box-shadow: 0 0 .2em .01em rgba(0,0,0,0.8);

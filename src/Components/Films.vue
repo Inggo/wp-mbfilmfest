@@ -88,7 +88,7 @@ export default {
   },
   computed: {
     defaultHeight() {
-      let contentHeight = document.documentElement.clientWidth < 1366 ? 78 : 90;
+      let contentHeight = document.documentElement.clientWidth < 1366 ? 105 : 118;
       return (this.filmcoverHeight + contentHeight) + 'px';
     },
     isMobile() {
@@ -336,7 +336,7 @@ body.mbfilmfest_film_playing {
 }
 
 .mbfilmfest_description_container {
-  height: 78px;
+  height: 105px;
 }
 
 .mbfilmfest_description_screentime {
@@ -374,7 +374,7 @@ body.mbfilmfest_film_playing {
 
 @media screen and (min-width: 1366px) {
   .mbfilmfest_description_container {
-    height: 90px;
+    height: 118px;
   }
 }
 

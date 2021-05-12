@@ -118,7 +118,7 @@ var mbfilmfest = {
             {
                 id: <?= json_encode($link->ID) ?>,
                 name: <?= json_encode($link->post_title) ?>,
-                image: <?= json_encode(\get_the_post_thumbnail_url($film, 'full')) ?>,
+                image: <?= json_encode(\get_the_post_thumbnail_url($link, 'full')) ?>,
                 link: <?= json_encode($link->link_url) ?>,
                 tags: [<?php
                 $tags = \get_the_tags($link);

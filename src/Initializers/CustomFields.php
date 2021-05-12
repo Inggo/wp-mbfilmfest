@@ -14,6 +14,7 @@ class CustomFields
         \add_action('acf/init', [$this, 'initFilmInfoCFs']);
         \add_action('acf/init', [$this, 'initMBFFSettingsCFs']);
         \add_action('acf/init', [$this, 'initBannerInfoCFs']);
+        \add_action('acf/init', [$this, 'initLinkInfoCFs']);
     }
 
     public function initFilmInfoCFs()

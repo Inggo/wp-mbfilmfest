@@ -432,11 +432,11 @@ class CustomFields
                     'placeholder' => '',
                 ),
                 array(
-                    'key' => 'field_6099444070f44',
-                    'label' => 'Height',
-                    'name' => 'height',
+                    'key' => 'field_6099699044a45',
+                    'label' => 'Width',
+                    'name' => 'width',
                     'type' => 'number',
-                    'instructions' => 'Input the height of the banner in pixels',
+                    'instructions' => 'Input the width of the banner in pixels',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -453,11 +453,11 @@ class CustomFields
                     'step' => 1,
                 ),
                 array(
-                    'key' => 'field_6099699044a45',
-                    'label' => 'Width',
-                    'name' => 'width',
+                    'key' => 'field_6099444070f44',
+                    'label' => 'Height',
+                    'name' => 'height',
                     'type' => 'number',
-                    'instructions' => 'Input the width of the banner in pixels',
+                    'instructions' => 'Input the height of the banner in pixels',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(

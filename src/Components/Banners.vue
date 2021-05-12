@@ -4,6 +4,7 @@
     class="mbfilmfest_banners"
   >
     <VueAgile
+      v-show="windowLoaded"
       :autoplay="isCarousel"
       ref="carousel"
       @before-change="setContainerDimensions($event)"
@@ -49,6 +50,7 @@ export default {
   },
   data() {
     return {
+      windowLoaded: false,
       currentSlideWidth: 0,
       currentSlideHeight: 0,
       sliderOptions: {
@@ -120,20 +122,20 @@ export default {
     }
   },
   mounted() {
-    this.setSlideDimensions();
     this.$nextTick(() => {
-      this.currentSlideWidth = this.slideDimensions[0].width;
-      this.currentSlideHeight = this.slideDimensions[0].height;
-      window.addEventListener('resize', () => {
+      window.addEventListener('load', () => {
+        this.windowLoaded = true;
         this.setSlideDimensions();
         this.$nextTick(() => {
+          this.currentSlideWidth = this.slideDimensions[0].width;
+          this.currentSlideHeight = this.slideDimensions[0].height;
           this.$refs.carousel.reload();
         });
-      });
-      window.addEventListener('load', () => {
-        this.setSlideDimensions();
-        this.$nextTick(() => {
-          this.$refs.carousel.reload();
+        window.addEventListener('resize', () => {
+          this.setSlideDimensions();
+          this.$nextTick(() => {
+            this.$refs.carousel.reload();
+          });
         });
       });
     });

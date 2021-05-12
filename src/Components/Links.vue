@@ -94,7 +94,7 @@ export default {
   -moz-box-shadow: 0 0 .2em .01em rgba(0,0,0,0.8);
 }
 
-.mbfilmfest_links li:hover {
+.mbfilmfest_links .mbfilmfest_links_contents li:hover {
   cursor: pointer;
   transform: rotate(0) !important;
 }

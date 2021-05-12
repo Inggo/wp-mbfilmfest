@@ -555,7 +555,7 @@ class CustomFields
                     array(
                         'param' => 'post_type',
                         'operator' => '==',
-                        'value' => 'mbff_link',
+                        'value' => 'mbfilmfest_link',
                     ),
                 ),
             ),

@@ -58,14 +58,15 @@ export default {
             {
                 breakpoint: 600,
                 settings: {
+                    navButtons: this.banners.length > 1,
                     dots: false
                 }
             },
             {
                 breakpoint: 900,
                 settings: {
-                    navButtons: true,
-                    dots: true
+                    navButtons: this.banners.length > 1,
+                    dots: this.banners.length > 1
                 }
             }
         ]
@@ -123,7 +124,18 @@ export default {
     this.$nextTick(() => {
       this.currentSlideWidth = this.slideDimensions[0].width;
       this.currentSlideHeight = this.slideDimensions[0].height;
-      window.addEventListener('resize', this.setSlideDimensions);
+      window.addEventListener('resize', () => {
+        this.setSlideDimensions();
+        this.$nextTick(() => {
+          this.$refs.carousel.reload();
+        });
+      });
+      window.addEventListener('load', () => {
+        this.setSlideDimensions();
+        this.$nextTick(() => {
+          this.$refs.carousel.reload();
+        });
+      });
     });
   }
 }

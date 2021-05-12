@@ -43,7 +43,10 @@
           </p>
         </div>
         <div class="mbfilmfest_play_button" 
-          :style="{ backgroundImage: 'url(' + baseUrl + 'play.svg)'}"
+          :style="{
+            backgroundImage: 'url(' + baseUrl + 'play.svg)',
+            height: filmcoverHeight + 'px'
+          }"
           @click.stop="playFocusedFilm(film)"
         >
         </div>

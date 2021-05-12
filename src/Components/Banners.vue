@@ -127,6 +127,7 @@ export default {
         this.windowLoaded = true;
         this.setSlideDimensions();
         this.$nextTick(() => {
+          this.$refs.carousel.goTo(0);
           this.currentSlideWidth = this.slideDimensions[0].width;
           this.currentSlideHeight = this.slideDimensions[0].height;
           this.$refs.carousel.reload();

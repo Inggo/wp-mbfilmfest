@@ -99,7 +99,7 @@ var mbfilmfest = {
                 title: <?= json_encode($film->post_title) ?>,
                 screening_time: <?= json_encode($film->screening_time) ?>,
                 description: <?= json_encode($film->description) ?>,
-                image: <?= json_encode(\get_the_post_thumbnail_url($film, 'full')) ?>,
+                image: <?= json_encode(\get_the_post_thumbnail_url($film, 'large')) ?>,
                 embed: <?= json_encode($oembed) ?>,
                 tags: [<?php
                 $tags = \get_the_tags($film);

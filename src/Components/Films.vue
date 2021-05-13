@@ -97,22 +97,22 @@ export default {
   },
   methods: {
     calculateFilmcoverHeight() {
-      // featured: 1980x1280 1:1.5 ; default: 1980x1080 1.77776:1
+      // featured: 1980x1280 1:1.44385 ; default: 1980x1080 1.77776:1
       let height = 0;
       
       if (document.documentElement.clientWidth < 500) {
         // 100% width
         height = (this.layout == 'featured')
-          ? document.documentElement.clientWidth * 1.5
+          ? document.documentElement.clientWidth * 1.44385
           : document.documentElement.clientWidth / 1.777776;
       } else if (document.documentElement.clientWidth < 800) {
         // 50% width
         height = (this.layout == 'featured')
-          ? (document.documentElement.clientWidth * 1.5) / 2
+          ? (document.documentElement.clientWidth * 1.44385) / 2
           : (document.documentElement.clientWidth / 1.777776) / 2;
       } else {
         // 33% width
-        height = this.layout == 'featured' ? 500 : 191;
+        height = this.layout == 'featured' ? 540 : 191;
       }
       this.filmcoverHeight = height;
     },
@@ -317,7 +317,7 @@ body.mbfilmfest_film_playing {
 }
 
 .mbfilmfest_featurefilms .mbfilmfest_play_button {
-  height: 500px;
+  height: 540px;
   background-size: 200px;
 }
 

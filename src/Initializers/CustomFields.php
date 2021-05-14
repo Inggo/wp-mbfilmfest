@@ -58,7 +58,7 @@ class CustomFields
                     'default_value' => '',
                     'placeholder' => '',
                     'maxlength' => '',
-                    'rows' => 4,
+                    'rows' => 2,
                     'new_lines' => 'br',
                 ),
                 array(
@@ -66,7 +66,7 @@ class CustomFields
                     'label' => 'Video oEmbed',
                     'name' => 'video_oembed',
                     'type' => 'oembed',
-                    'instructions' => 'Input the URL of the video below to generate the oEmbed code',
+                    'instructions' => '',
                     'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
@@ -76,6 +76,25 @@ class CustomFields
                     ),
                     'width' => '',
                     'height' => '',
+                ),
+                array(
+                    'key' => 'field_609e18af9256d',
+                    'label' => 'Video Embed Code',
+                    'name' => 'video_embed_code',
+                    'type' => 'textarea',
+                    'instructions' => 'Enter the embed code below, or leave blank to use oEmbed.',
+                    'required' => 0,
+                    'conditional_logic' => 0,
+                    'wrapper' => array(
+                        'width' => '',
+                        'class' => '',
+                        'id' => '',
+                    ),
+                    'default_value' => '',
+                    'placeholder' => '',
+                    'maxlength' => '',
+                    'rows' => '',
+                    'new_lines' => '',
                 ),
             ),
             'location' => array(

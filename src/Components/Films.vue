@@ -10,11 +10,12 @@
         ref="films"
         :key="film.id" 
         @mouseenter="isMobile ? null : setFocusFilm(film)"
-        @mouseleave="isMobile ? null : unfocusFilm(film)"
+        @mouseleave="isMobile ? null : unfocusFilm()"
         :class="{
           mbfilmfest_focused_film: focusedOnFilm == film.id,
           mbfilmfest_film_preload: !filmLoaded.includes(film.id),
-          mbfilmfest_film_loaded: filmLoaded.includes(film.id)
+          mbfilmfest_film_loaded: filmLoaded.includes(film.id),
+          mbfilmfest_film_playable: isFilmPlayable(film)
         }"
       >
         <div class="mbfilmfest_filmcover_container"
@@ -35,7 +36,7 @@
           <h4>{{ film.title }}</h4>
           <p class="mbfilmfest_description_screentime" v-if="film.screening_time">{{ film.screening_time }}</p>
           <p v-html="film.description"></p>
-          <p class="mbfilmfest_watch_now">
+          <p class="mbfilmfest_watch_now" v-if="isFilmPlayable(film)">
             <a
               href="#"
               @click.prevent="playFocusedFilm(film)"
@@ -48,6 +49,7 @@
             height: filmcoverHeight + 'px'
           }"
           @click.stop="playFocusedFilm(film)"
+          v-if="isFilmPlayable(film)"
         >
         </div>
       </li>
@@ -77,6 +79,7 @@ export default {
   },
   data() {
     return {
+      focusedFilmIsPlayable: false,
       focusedOnFilm: false,
       playing: false,
       currentEmbed: '',
@@ -96,6 +99,11 @@ export default {
     }
   },
   methods: {
+    isFilmPlayable(film) {
+      let now = Date.now();
+      return (!film.startTime || film.startTime <= now) &&
+          (!film.endTime || film.endTime >= now);
+    },
     calculateFilmcoverHeight() {
       // featured: 1980x1280 1:1.44385 ; default: 1980x1080 1.77776:1
       let height = 0;
@@ -122,14 +130,55 @@ export default {
       }
     },
     setFocusFilm(film) {
+      this.unfocusFilm();
       this.focusedOnFilm = film.id;
       this.$refs.films[this.filmLoaded.indexOf(film.id)].style.height =
         this.filmHeights[this.filmLoaded.indexOf(film.id)] + 'px';
+      if (this.isFilmPlayable(film)) {
+        this.focusedFilmIsPlayable = true;
+      }
+      if (this.isMobile) {
+        // Scroll to bottom of description after animation
+        setTimeout(() => {
+          // Double check focused film
+          if (!this.focusedOnFilm == film.id) {
+            return;
+          }
+
+          let padTop = 24; // Add some white space on top
+          let filmIndex = this.films.map(f => f.id).indexOf(film.id);
+          let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          let filmRef = this.$refs.films[filmIndex];
+          let cardHeight = filmRef.offsetHeight;
+          let scrollTo = scrollTop;
+
+          if (cardHeight > window.innerHeight) {
+            let descRef = filmRef.querySelector('.mbfilmfest_description_container');
+            if (descRef.offsetHeight > window.innerHeight) {
+              // If description height is too high, scroll to top of it
+              scrollTo += descRef.getBoundingClientRect().top - padTop;
+            } else {
+              // Otherwise, scroll to bottom of height of card
+              scrollTo += filmRef.getBoundingClientRect().bottom - window.innerHeight + padTop;
+            }
+          } else {
+            scrollTo += filmRef.getBoundingClientRect().top - padTop;
+          }
+          
+          window.scroll({
+            top: scrollTo,
+            behavior: 'smooth'
+          });
+        }, 125);
+      }
+      this.$emit('film-focused', film);
     },
-    unfocusFilm(film) {
+    unfocusFilm() {
       this.focusedOnFilm = false;
-      this.$refs.films[this.filmLoaded.indexOf(film.id)].style.height =
-        this.defaultHeight;
+      this.focusedFilmIsPlayable = false;
+      for (let i = 0; i < this.$refs.films.length; i++) {
+        this.$refs.films[i].style.height = this.defaultHeight;
+      }
     },
     selectFilm(film) {
       if (this.isMobile) {
@@ -140,6 +189,9 @@ export default {
       return this.playFilm(film.embed);
     },
     playFilm(embed) {
+      if (!this.focusedFilmIsPlayable) {
+        return false;
+      }
       document.body.classList.add("mbfilmfest_film_playing");
       this.currentEmbed = embed;
       this.playing = true;
@@ -204,7 +256,7 @@ body.mbfilmfest_film_playing {
 }
 
 .mbfilmfest_film_loaded {
-  transition: height 0.4s ease-out, transform 0.4s ease-out;
+  transition: height 0.125s ease-out, transform 0.125s ease-out;
 }
 
 .mbfilmfest_film_loaded {
@@ -355,13 +407,15 @@ body.mbfilmfest_film_playing {
   opacity: 1;
 }
 
-@media screen and (min-width: 500px) {
+/* Landscape phones */
+@media screen and (min-width: 576px) {
   .mbfilmfest_films li {
     width: 50%;
   }
 }
 
-@media screen and (min-width: 800px) {
+ /* Medium devices */
+@media screen and (min-width: 768px) {
   .mbfilmfest_films li {
     width: 30%;
   }
@@ -372,16 +426,26 @@ body.mbfilmfest_film_playing {
   }
 }
 
-@media screen and (min-width: 1366px) {
+/* Large devices */
+@media screen and (min-width: 992px) {
+  .mbfilmfest_film_loaded {
+    transition: height 0.2s ease-out, transform 0.2s ease-out;
+  }
+
   .mbfilmfest_description_container {
     height: 118px;
   }
 }
 
+/* Desktop */
+@media screen and (min-width: 1200px) {
+}
+
+/* Transitions */
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
-    flex: 1;
+  flex: 1;
 }
 
 .fade-enter-from,

@@ -79,20 +79,24 @@ var mbfilmfest = {
     ],
         films: [
 <?php foreach ($mbff_films as $film):
-    $oembed = get_field('video_oembed', $film->ID);
-    $matches = null;
-    preg_match('/src="(.+?)"/', $oembed, $matches);
-    $src = $matches[1];
-    $params = array(
-        'autoplay'  => 1,
-        'hd'        => 1,
-        'autohide'  => 1
-    );
-    $new_src = add_query_arg($params, $src);
-    $oembed = str_replace($src, $new_src, $oembed);
+    if (\get_field('video_embed_code', $film->ID)) {
+        $oembed = (\get_field('video_embed_code', $film->ID));
+    } else {
+        $oembed = \get_field('video_oembed', $film->ID);
+        $matches = null;
+        preg_match('/src="(.+?)"/', $oembed, $matches);
+        $src = $matches[1];
+        $params = array(
+            'autoplay'  => 1,
+            'hd'        => 1,
+            'autohide'  => 1
+        );
+        $new_src = add_query_arg($params, $src);
+        $oembed = str_replace($src, $new_src, $oembed);
 
-    $attributes = 'frameborder="0"';
-    $oembed = str_replace('></iframe>', ' ' . $attributes . '></iframe>', $oembed);
+        $attributes = 'frameborder="0"';
+        $oembed = str_replace('></iframe>', ' ' . $attributes . '></iframe>', $oembed);
+    }
     ?>
             {
                 id: <?= json_encode($film->ID) ?>,
@@ -101,6 +105,8 @@ var mbfilmfest = {
                 description: <?= json_encode($film->description) ?>,
                 image: <?= json_encode(\get_the_post_thumbnail_url($film, 'large')) ?>,
                 embed: <?= json_encode($oembed) ?>,
+                startTime: <?= json_encode(\get_field('start_time', $film->ID)) ?>,
+                endTime: <?= json_encode(\get_field('end_time', $film->ID)) ?>,
                 tags: [<?php
                 $tags = \get_the_tags($film);
                 foreach ($tags as $i => $tag):

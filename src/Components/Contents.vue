@@ -7,10 +7,14 @@
       title="Feature Films"
       layout="featured"
       :films="featuredFilms"
+      ref="featureFilms"
+      @film-focused="$refs.shortFilms.unfocusFilm()"
     ></MBFFFilmList>
     <MBFFFilmList
       title="Short Films"
       :films="shortFilms"
+      ref="shortFilms"
+      @film-focused="$refs.featureFilms.unfocusFilm()"
     ></MBFFFilmList>
   </main>
 </template>

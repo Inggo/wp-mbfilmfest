@@ -97,6 +97,12 @@ var mbfilmfest = {
         $attributes = 'frameborder="0"';
         $oembed = str_replace('></iframe>', ' ' . $attributes . '></iframe>', $oembed);
     }
+    $start_time = \get_field('start_time', $film->ID)
+        ? DateTime::createFromFormat('Y-m-d H:i:s', \get_field('start_time', $film->ID))->format('c')
+        : null;
+    $end_time = \get_field('end_time', $film->ID)
+        ? DateTime::createFromFormat('Y-m-d H:i:s', \get_field('end_time', $film->ID))->format('c')
+        : null;
     ?>
             {
                 id: <?= json_encode($film->ID) ?>,
@@ -105,8 +111,8 @@ var mbfilmfest = {
                 description: <?= json_encode($film->description) ?>,
                 image: <?= json_encode(\get_the_post_thumbnail_url($film, 'large')) ?>,
                 embed: <?= json_encode($oembed) ?>,
-                startTime: <?= json_encode(\get_field('start_time', $film->ID)) ?>,
-                endTime: <?= json_encode(\get_field('end_time', $film->ID)) ?>,
+                startTime: <?= json_encode($start_time) ?>,
+                endTime: <?= json_encode($end_time) ?>,
                 tags: [<?php
                 $tags = \get_the_tags($film);
                 foreach ($tags as $i => $tag):

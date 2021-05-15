@@ -42,6 +42,7 @@
               @click.prevent="playFocusedFilm(film)"
             >Watch Now</a>
           </p>
+          <p class="mbfilmfest_watch_now" v-else>&nbsp;</p>
         </div>
         <div class="mbfilmfest_play_button" 
           :style="{

@@ -98,10 +98,18 @@ var mbfilmfest = {
         $oembed = str_replace('></iframe>', ' ' . $attributes . '></iframe>', $oembed);
     }
     $start_time = \get_field('start_time', $film->ID)
-        ? DateTime::createFromFormat('Y-m-d H:i:s', \get_field('start_time', $film->ID))->format('c')
+        ? DateTime::createFromFormat(
+            'Y-m-d H:i:s',
+            \get_field('start_time', $film->ID),
+            \wp_timezone()
+        )->format('c')
         : null;
     $end_time = \get_field('end_time', $film->ID)
-        ? DateTime::createFromFormat('Y-m-d H:i:s', \get_field('end_time', $film->ID))->format('c')
+        ? DateTime::createFromFormat(
+            'Y-m-d H:i:s',
+            \get_field('end_time', $film->ID),
+            \wp_timezone()
+        )->format('c')
         : null;
     ?>
             {

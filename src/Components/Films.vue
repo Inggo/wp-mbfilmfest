@@ -100,11 +100,11 @@ export default {
   },
   methods: {
     isFilmPlayable(film) {
-      let now = Date.now();
+      let now = new Date();
       let start = film.startTime ? new Date(film.startTime) : null;
       let end = film.endTime ? new Date(film.endTime) : null;
-      return (!start || start.getTime() <= now) &&
-          (!end || end.getTime() >= now);
+      return (!start || start.getTime() <= now.getTime()) &&
+          (!end || end.getTime() >= now.getTime());
     },
     calculateFilmcoverHeight() {
       // featured: 1980x1280 1:1.44385 ; default: 1980x1080 1.77776:1

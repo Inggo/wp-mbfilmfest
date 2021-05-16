@@ -111,6 +111,9 @@ var mbfilmfest = {
             \wp_timezone()
         )->format('c')
         : null;
+
+    // Encode the embed code
+    $oembed = base64_encode($oembed);
     ?>
             {
                 id: <?= json_encode($film->ID) ?>,
@@ -163,6 +166,7 @@ var mbfilmfest = {
         secondaryLinksFilter: <?= json_encode(\get_field('secondary_links_tag_filter') ? \get_field('secondary_links_tag_filter')->term_id : null); ?>,
         secondaryLinksBackground: <?= json_encode(\get_field('secondary_links_background_color')); ?>,
         showSecondaryLinkNames: <?= json_encode(\get_field('show_secondary_link_names')); ?>,
-    }
+    },
+    timeApiUrl: <?= json_encode(\get_rest_url(null, 'mbff/v1/current_time')); ?>
 }
 </script>

@@ -42,7 +42,6 @@
               @click.prevent="playFocusedFilm(film)"
             >Watch Now</a>
           </p>
-          <p class="mbfilmfest_watch_now" v-else>&nbsp;</p>
         </div>
         <div class="mbfilmfest_play_button" 
           :style="{
@@ -80,6 +79,8 @@ export default {
   },
   data() {
     return {
+      timeApi: window.mbfilmfest.timeApiUrl,
+      currentTime: null,
       focusedFilmIsPlayable: false,
       focusedOnFilm: false,
       playing: false,
@@ -100,8 +101,19 @@ export default {
     }
   },
   methods: {
+    updateCurrentTime() {
+      fetch(this.timeApi)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('Updated current time to ', data)
+          this.currentTime = data;
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    },
     isFilmPlayable(film) {
-      let now = new Date();
+      let now = new Date(this.currentTime);
       let start = film.startTime ? new Date(film.startTime) : null;
       let end = film.endTime ? new Date(film.endTime) : null;
       return (!start || start.getTime() <= now.getTime()) &&
@@ -115,12 +127,12 @@ export default {
         // 100% width
         height = (this.layout == 'featured')
           ? document.documentElement.clientWidth * 1.44385
-          : document.documentElement.clientWidth / 1.777776;
+          : document.documentElement.clientWidth / 1.77776;
       } else if (document.documentElement.clientWidth < 800) {
         // 50% width
         height = (this.layout == 'featured')
           ? (document.documentElement.clientWidth * 1.44385) / 2
-          : (document.documentElement.clientWidth / 1.777776) / 2;
+          : (document.documentElement.clientWidth / 1.77776) / 2;
       } else {
         // 33% width
         height = this.layout == 'featured' ? 540 : 191;
@@ -133,6 +145,7 @@ export default {
       }
     },
     setFocusFilm(film) {
+      this.updateCurrentTime();
       this.unfocusFilm();
       this.focusedOnFilm = film.id;
       this.$refs.films[this.filmLoaded.indexOf(film.id)].style.height =
@@ -196,7 +209,7 @@ export default {
         return false;
       }
       document.body.classList.add("mbfilmfest_film_playing");
-      this.currentEmbed = embed;
+      this.currentEmbed = atob(embed);
       this.playing = true;
     },
     stopFilm() {
@@ -206,6 +219,7 @@ export default {
     }
   },
   mounted() {
+    this.updateCurrentTime();
     this.$nextTick(() => {
       this.calculateFilmcoverHeight();
       this.$nextTick(() => {

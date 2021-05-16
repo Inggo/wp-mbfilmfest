@@ -14,5 +14,6 @@ class Init
         new Initializers\CustomPostTypes($this->plugin);
         new Initializers\CustomFields($this->plugin);
         new Initializers\Shortcodes($this->plugin);
+        new Initializers\RestEndpoints($this->plugin);
     }
 }

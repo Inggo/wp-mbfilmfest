@@ -91,6 +91,8 @@ export default {
             width: banner.width + 'px',
             height: banner.height + 'px'
           });
+        /**
+          Don't bother with height/width edge cases
         } else if (banner.height <= document.documentElement.clientHeight) {
           dimensions.push({
             width: document.documentElement.clientWidth + 'px',
@@ -101,6 +103,7 @@ export default {
             width: banner.width / (banner.height/document.documentElement.clientHeight) + 'px',
             height: document.documentElement.clientHeight + 'px'
           })
+        */
         } else {
           // Edge case, follow width
           dimensions.push({

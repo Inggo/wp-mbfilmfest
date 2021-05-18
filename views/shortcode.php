@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // We will use the $post global for settings
 global $post;
 

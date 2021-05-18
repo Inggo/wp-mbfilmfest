@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <header
     id="mbfilmfest_banners"
     class="mbfilmfest_banners"
@@ -92,7 +92,7 @@ export default {
             height: banner.height + 'px'
           });
         /**
-          Don't bother with height/width edge cases
+          TODO: Add option for this auto-fit setting
         } else if (banner.height <= document.documentElement.clientHeight) {
           dimensions.push({
             width: document.documentElement.clientWidth + 'px',
@@ -139,6 +139,7 @@ export default {
           this.setSlideDimensions();
           this.$nextTick(() => {
             this.$refs.carousel.reload();
+            this.$refs.carousel.goTo(0);
           });
         });
       });

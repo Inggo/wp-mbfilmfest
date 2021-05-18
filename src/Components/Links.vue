@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div
     class="mbfilmfest_links_container"
     :style="{
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     goToLink(link) {
-      window.open(link)
+      if (link) window.open(link);
     },
     randomRot() {
       return 'transform: ' + this.randomRotValue();

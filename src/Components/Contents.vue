@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <main
     id="mbfilmfest_body"
     class="mbfilmfest_body"

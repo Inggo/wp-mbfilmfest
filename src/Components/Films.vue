@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <section :class="[
     'mbfilmfest_films',
     layout == 'featured' ? 'mbfilmfest_featurefilms' : 'mbfilmfest_shortfilms'

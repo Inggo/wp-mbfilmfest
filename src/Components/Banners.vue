@@ -138,6 +138,7 @@ export default {
         window.addEventListener('resize', () => {
           this.setSlideDimensions();
           this.$nextTick(() => {
+            this.setContainerDimensions({nextSlide: 0});
             this.$refs.carousel.reload();
             this.$refs.carousel.goTo(0);
           });

@@ -224,7 +224,7 @@ export default {
       this.calculateFilmcoverHeight();
       this.$nextTick(() => {
         this.films.forEach((film, index) => {
-          this.filmHeights.push(this.$refs.films[index].clientHeight);
+          this.filmHeights.push(this.$refs.films[index].clientHeight + 16);
         });
         this.$nextTick(() => {
           this.films.forEach((film, index) => {

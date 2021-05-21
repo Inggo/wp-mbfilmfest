@@ -97,7 +97,7 @@ export default {
       return (this.filmcoverHeight + contentHeight) + 'px';
     },
     isMobile() {
-      return isMobile();
+      return isMobile({tablet: true});
     }
   },
   methods: {

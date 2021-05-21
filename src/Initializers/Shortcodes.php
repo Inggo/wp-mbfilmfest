@@ -29,14 +29,14 @@ class Shortcodes
             'mbfilmfest_vendors',
             \plugins_url('dist/js/chunk-vendors.js', $this->plugin->plugin_dir),
             ['vue_runtime'],
-            '0.4.0',
+            $this->plugin->version,
             true
         );
         \wp_register_script(
             'mbfilmfest',
             \plugins_url('dist/js/app.js', $this->plugin->plugin_dir),
             ['vue_runtime', 'mbfilmfest_vendors'],
-            '0.4.0',
+            $this->plugin->version,
             true
         );
 
@@ -44,14 +44,14 @@ class Shortcodes
             'mbfilmfest_vendors',
             \plugins_url('/dist/css/chunk-vendors.css', $this->plugin->plugin_dir),
             [],
-            '0.4.0'
+            $this->plugin->version
         );
 
         \wp_register_style(
             'mbfilmfest',
             \plugins_url('/dist/css/app.css', $this->plugin->plugin_dir),
             ['mbfilmfest_vendors'],
-            '0.4.0'
+            $this->plugin->version
         );
 
         global $post;

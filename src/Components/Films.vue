@@ -49,7 +49,7 @@
             height: filmcoverHeight + 'px'
           }"
           @click.stop="playFocusedFilm(film)"
-          v-if="isFilmPlayable(film)"
+          v-show="isFilmPlayable(film)"
         >
         </div>
       </li>

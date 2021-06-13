@@ -1,24 +1,7 @@
 # mb-filmfest
 
-## Project setup
-```
-npm install
-```
+Run `npm run build` before packing
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Pack source files in zip and install via WP Admin
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Do not include /node_modules/ and all files under .gitignore
